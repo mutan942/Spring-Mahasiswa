@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JoinDapatBanyakAmbil {
     private String namamatkul;
-    private int jumlah;
+    //private int jumlah;
 }

@@ -21,7 +21,7 @@ public interface SetmatkulRepository extends JpaRepository<SetMatkulEntity, Inte
             "FROM MahasiswaEntity a INNER JOIN JurusanEntity b ON b.id=a.jurusan INNER JOIN FakultasEntity c ON a.fakultas=c.id")
     List<JoinDapatSiswa> getsiswa();
 
-    @Query(value = "SELECT new com.example.testing.testing.dto.JoinDapatBanyakAmbil(b.namamatkul, COUNT(b.namamatkul) as 'jumlah') "
+    @Query(value = "SELECT new com.example.testing.testing.dto.JoinDapatBanyakAmbil(b.namamatkul)"
             +"FROM SetMatkulEntity a INNER JOIN MatkulEntity b ON a.matkul=b.id GROUP BY a.matkul")
     List<JoinDapatBanyakAmbil> getbanyakambil();
 }
