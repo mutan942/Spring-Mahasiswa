@@ -1,15 +1,16 @@
-<h4>Welcome to home</h4>
+<h4>Mahasiswa dan Matakuliah</h4>
 <p>Please do CRUD for Mahasiswa Tables</p>
 <button class="btn btn-sm btn-primary" onclick="openmodal('/addmhsform')">Add Mhs</button>
 <div class="card">
     <div class="card-header">
-        <h5>Table Mahasiswa</h5>
+        <h5>Table</h5>
     </div>
     <div class="card-body">
         <table id="table-mhs" class="table">
             <thead>
                 <tr>
                     <th>Nama</th>
+                    <th>Matakuliah</th>
                     <th>Jurusan</th>
                     <th>Fakultas</th>
                 </tr>
@@ -26,11 +27,11 @@ $(document).ready( function () {
 	 $.ajax({
 			data: {},
 			type: "GET",
-			url: "/setmatkul/dapatsiswa",
+			url: "/setmatkul/dapatkuliah",
 			success: function(dataResult){
 			    var html = "";
                 dataResult.forEach(function(obj) {
-                    html += "<tr><td>"+obj.nama+"</td><td>"+obj.namajurusan+"</td><td>"+obj.namafakultas+"</td></tr>";
+                    html += "<tr><td>"+obj.nama+"</td><td>"+obj.namamatkul+"</td><td>"+obj.namajurusan+"</td><td>"+obj.namafakultas+"</td></tr>";
                 });
                 $("#table-body").html(html);
 				$("#table-mhs").DataTable();

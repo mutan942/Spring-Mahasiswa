@@ -15,4 +15,14 @@ public class WebController {
     public String home(){
         return "home";
     }
+
+    @RequestMapping(value = "/addmhsform")
+    public String addmhsform(){
+        return "formaddmhs";
+    }
+
+    @RequestMapping(value = "/dataku")
+    public String dataku(){
+        return "dataku";
+    }
 }

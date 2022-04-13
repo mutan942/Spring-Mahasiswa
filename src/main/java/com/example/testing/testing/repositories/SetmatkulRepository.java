@@ -1,5 +1,6 @@
 package com.example.testing.testing.repositories;
 
+import com.example.testing.testing.dto.JoinDapatBanyakAmbil;
 import com.example.testing.testing.dto.JoinDapatMatkul;
 import com.example.testing.testing.dto.JoinDapatSiswa;
 import com.example.testing.testing.entities.SetMatkulEntity;
@@ -19,4 +20,8 @@ public interface SetmatkulRepository extends JpaRepository<SetMatkulEntity, Inte
     @Query(value = "SELECT new com.example.testing.testing.dto.JoinDapatSiswa(a.nama, b.namajurusan, c.namafakultas) " +
             "FROM MahasiswaEntity a INNER JOIN JurusanEntity b ON b.id=a.jurusan INNER JOIN FakultasEntity c ON a.fakultas=c.id")
     List<JoinDapatSiswa> getsiswa();
+
+    @Query(value = "SELECT new com.example.testing.testing.dto.JoinDapatBanyakAmbil(b.namamatkul, COUNT(b.namamatkul) as 'jumlah') "
+            +"FROM SetMatkulEntity a INNER JOIN MatkulEntity b ON a.matkul=b.id GROUP BY a.matkul")
+    List<JoinDapatBanyakAmbil> getbanyakambil();
 }

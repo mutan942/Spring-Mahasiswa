@@ -1,5 +1,6 @@
 package com.example.testing.testing.controller;
 
+import com.example.testing.testing.dto.JoinDapatBanyakAmbil;
 import com.example.testing.testing.dto.JoinDapatMatkul;
 import com.example.testing.testing.dto.JoinDapatSiswa;
 import com.example.testing.testing.entities.SetMatkulEntity;
@@ -55,6 +56,11 @@ public class SetMatkulController {
     @GetMapping(value = "dapatkuliah")
     public ResponseEntity<List<JoinDapatMatkul>> dapatkuliah(){
         return ResponseEntity.ok(mahasiswaRepository.getsetmatkul());
+    }
+
+    @GetMapping(value = "dapatbanyakambil")
+    public ResponseEntity<List<JoinDapatBanyakAmbil>> dapatbanyakambil(){
+        return ResponseEntity.ok(mahasiswaRepository.getbanyakambil());
     }
 
     @RequestMapping(path="dapatsiswa", method=RequestMethod.GET)
