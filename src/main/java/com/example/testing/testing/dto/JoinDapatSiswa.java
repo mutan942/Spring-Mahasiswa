@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JoinDapatSiswa {
+    private int id;
     private String nama;
     private String namajurusan;
     private String namafakultas;

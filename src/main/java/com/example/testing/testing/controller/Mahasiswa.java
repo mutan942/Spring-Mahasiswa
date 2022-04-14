@@ -48,7 +48,7 @@ public class Mahasiswa {
     }
 
     @GetMapping(value = "deletemhs")
-    public CommonResponse<String> deletematkul(@RequestParam int id){
+    public CommonResponse<String> deletemhs(@RequestParam int id){
         mahasiswaRepository.deleteById(id);
         return ResponseGenerator.responseberhasil("Nothing","Data berhasil dimasukkan.");
     }

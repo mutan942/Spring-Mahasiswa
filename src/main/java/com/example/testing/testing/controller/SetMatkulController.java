@@ -67,4 +67,9 @@ public class SetMatkulController {
     public ResponseEntity<List<JoinDapatSiswa>> dapatsiswa(){
         return ResponseEntity.ok(mahasiswaRepository.getsiswa());
     }
+
+    @GetMapping(value = "dapatkuliahbymhs")
+    public ResponseEntity<List<JoinDapatMatkul>> dapatkuliahbymhs(@RequestParam int id){
+        return ResponseEntity.ok(mahasiswaRepository.getsetmatkulbymhs(id));
+    }
 }

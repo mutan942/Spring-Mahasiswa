@@ -1,33 +1,29 @@
 <form id="submit">
-    <div class="form-group">
-        <label>Nama Mahasiswa</label>
-        <input type="text" class="form-control" id="nama" name="nama" required>
-    </div>
+    <input type="hidden" class="form-control" id="mahasiswa" name="mahasiswa" readonly>
 
     <div class="form-group">
         <label>Jurusan</label>
-        <select class="form-control" name="jurusan" id="jurusan" required>
-            <option value=""> Pilih jurusan </option>
-            <th:block th:each="j : ${jurusan}">
-                <option th:each="text : ${j.namajurusan}" th:myTag="${j.fakultas}" th:value="${j.id}" th:text="${j.namajurusan}" />
+        <select class="form-control" name="matkul" id="matkul" required>
+            <option value=""> Pilih matakuliah </option>
+            <th:block th:each="m : ${matkul}">
+                <option th:each="text : ${m.namamatkul}" th:value="${m.id}" th:text="${m.namamatkul}" />
             </th:block>
         </select>
-        <input type="hidden" value="" id="fakultas" name="fakultas">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <script>
-
+$("#mahasiswa").val(id_mhs_global);
 function resfreshtable(){
-        $.ajax({
-			data: {},
+       $.ajax({
+			data: {id:id_mhs_global},
 			type: "GET",
-			url: "/setmatkul/dapatsiswa",
+			url: "/setmatkul/dapatkuliahbymhs",
 			success: function(dataResult){
 			    var html = "";
                 dataResult.forEach(function(obj) {
-                    html += "<tr><td>"+obj.nama+" <button onclick='movepage(\"/setmatkul/?id="+obj.id+"\","+obj.id+")' class='btn btn-sm btn-success'>Set Matkul</button></td><td>"+obj.namajurusan+"</td><td>"+obj.namafakultas+" <button onclick='deletedata("+obj.id+")' class='btn btn-sm btn-danger'>Delete</button></td></tr>";
+                    html += "<tr><td>"+obj.nama+"</td><td>"+obj.namamatkul+" <button onclick='deletedata("+obj.id+")' class='btn btn-sm btn-danger'>Delete</button></td></tr>";
                 });
                 $("#table-body").html(html);
 				$("#table-mhs").DataTable();
@@ -37,16 +33,14 @@ function resfreshtable(){
 
     $("#submit").on("submit", function(e){
         e.preventDefault();
-        var nama = $("#nama").val();
-        var jurusan = $("#jurusan").val();
-        var fakultas = $("#fakultas").val();
+        var mahasiswa = $("#mahasiswa").val();
+        var matkul = $("#matkul").val();
         $.ajax({
-                    url: '/mahasiswa/addmhs',
+                    url: '/setmatkul/addmatkul',
                     type: 'post',
                     data: JSON.stringify({
-                        "nama" : nama,
-                        "jurusan" : jurusan,
-                        "fakultas" : fakultas
+                        "mahasiswa" : mahasiswa,
+                        "matkul" : matkul
                     }),
                     contentType: "application/json",
                     dataType: "json",
@@ -67,7 +61,7 @@ function resfreshtable(){
         $.ajax({
 			data: {id:id},
 			type: "GET",
-			url: "/mahasiswa/deletemhs",
+			url: "/setmatkul/deletemhs",
 			success: function(dataResult){
 			    resfreshtable();
 			}

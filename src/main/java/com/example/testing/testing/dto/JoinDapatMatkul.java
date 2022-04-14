@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JoinDapatMatkul {
+    private int id;
     private String nama;
     private String namamatkul;
     private String namajurusan;

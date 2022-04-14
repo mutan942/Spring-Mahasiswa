@@ -1,17 +1,17 @@
-<h4>Welcome to home</h4>
-<p>Please do CRUD for Mahasiswa Tables</p>
-<button class="btn btn-sm btn-primary mb-1" onclick="openmodal('/addmhsform')">Add Mhs</button>
+<h4>Set Matkul</h4>
+<p>Welcome <span th:text="${mhs.nama}"></span></p>
+<button class="btn btn-sm btn-primary mb-1" onclick="openmodal('/addmatkulform')">Add Matakuliah</button>
+<button class="btn btn-sm btn-warning mb-1" onclick="movepage('/home')">Back</button>
 <div class="card">
     <div class="card-header">
-        <h5>Table Mahasiswa</h5>
+        <h5>Table Matakuliah</h5>
     </div>
     <div class="card-body">
         <table id="table-mhs" class="table">
             <thead>
                 <tr>
                     <th>Nama</th>
-                    <th>Jurusan</th>
-                    <th>Fakultas</th>
+                    <th>Mata Kuliah</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -44,13 +44,13 @@
 $(document).ready( function () {
     function resfreshtable(){
         $.ajax({
-			data: {},
+			data: {id:id_mhs_global},
 			type: "GET",
-			url: "/setmatkul/dapatsiswa",
+			url: "/setmatkul/dapatkuliahbymhs",
 			success: function(dataResult){
 			    var html = "";
                 dataResult.forEach(function(obj) {
-                    html += "<tr><td>"+obj.nama+" <button onclick='movepage(\"/setmatkul/?id="+obj.id+"\","+obj.id+")' class='btn btn-sm btn-success'>Set Matkul</button></td><td>"+obj.namajurusan+"</td><td>"+obj.namafakultas+" <button onclick='deletedata("+obj.id+")' class='btn btn-sm btn-danger'>Delete</button></td></tr>";
+                    html += "<tr><td>"+obj.nama+"</td><td>"+obj.namamatkul+" <button onclick='deletedata("+obj.id+")' class='btn btn-sm btn-danger'>Delete</button></td></tr>";
                 });
                 $("#table-body").html(html);
 				$("#table-mhs").DataTable();
@@ -60,9 +60,9 @@ $(document).ready( function () {
 	resfreshtable();
 });
 
-function openmodal(){
+function openmodal(url){
     $("#exampleModal").modal("toggle");
-    $(".modal-body").load("/addmhsform");
+    $(".modal-body").load(url);
 }
 
 function deletedata(id){
@@ -76,8 +76,7 @@ function deletedata(id){
 		});
     }
 
-function movepage(url, id){
-    id_mhs_global = id
+function movepage(url){
     $("#data-page").load(url);
 }
 </script>
